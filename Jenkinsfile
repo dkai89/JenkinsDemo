@@ -1,10 +1,8 @@
 pipeline {
-    agent {
-        label 'WorkerNode'  // Replace with your worker node's label
-    }
+    agent any  // Use any available Jenkins node (including controller)
     
     environment {
-        DOCKER_IMAGE = 'discoverdevops/my-app:latest'
+        DOCKER_IMAGE = 'dilipdevops1982/djdevops:latest'
         GIT_REPO = 'https://github.com/discover-devops/JenkinsDemo.git'
     }
 
@@ -18,7 +16,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    def appImage = docker.build(DOCKER_IMAGE)
+                    docker.build(DOCKER_IMAGE)
                 }
             }
         }
