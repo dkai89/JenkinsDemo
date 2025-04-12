@@ -1,26 +1,26 @@
 pipeline {
-    // Specify the agent (worker node) where the job should run
-    agent { label 'WorkerNode' }
+    // Agent ko master node pe set karte hain
+    agent any
 
     environment {
-        REPO_URL = 'https://github.com/discover-devops/JenkinsDemo.git'  // Your GitHub repository URL
-        DOCKER_IMAGE = 'discoverdevops/my-custom-tomcat:latest'          // Docker image name
-        APP_FOLDER = 'my_tomcat_app'                                     // Folder containing the Dockerfile and application files
+        REPO_URL     = 'https://github.com/dkai89/JenkinsDemo.git'   // Tumhara GitHub repo URL
+        DOCKER_IMAGE = 'dilipdevops1982/tomcatapp:latest'             // Tumhara Docker image tag
+        APP_FOLDER   = 'my_tomcat_app'                                // Dockerfile + App files folder
     }
 
     stages {
         stage('Checkout Source Code') {
             steps {
-                echo 'Checking out source code from repository...'
+                echo '🔄 Checking out source code from GitHub...'
                 git branch: 'main', url: "${REPO_URL}"
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                echo 'Building Docker image on WorkerNode...'
+                echo '🐳 Building Docker image...'
                 script {
-                    // Build the Docker image using the Dockerfile in the APP_FOLDER
+                    // App folder ke andar se Dockerfile pick karega
                     docker.build("${DOCKER_IMAGE}", "./${APP_FOLDER}")
                 }
             }
@@ -28,10 +28,11 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                echo 'Pushing Docker image to DockerHub...'
+                echo '📤 Pushing Docker image to DockerHub...'
                 script {
+                    // Credentials ID should be set in Jenkins for DockerHub
                     docker.withRegistry('', 'dockerhub-credentials') {
-                        docker.image(DOCKER_IMAGE).push()
+                        docker.image("${DOCKER_IMAGE}").push()
                     }
                 }
             }
@@ -39,12 +40,12 @@ pipeline {
 
         stage('Deploy Application') {
             steps {
-                echo 'Deploying application on WorkerNode...'
+                echo '🚀 Deploying application on Master Node...'
                 script {
                     sh """
-                    docker stop my-custom-tomcat || true
-                    docker rm my-custom-tomcat || true
-                    docker run -d --name my-custom-tomcat -p 8000:8080 ${DOCKER_IMAGE}
+                        docker stop my-custom-tomcat || true
+                        docker rm my-custom-tomcat || true
+                        docker run -d --name my-custom-tomcat -p 8000:8080 ${DOCKER_IMAGE}
                     """
                 }
             }
@@ -53,15 +54,15 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline executed successfully on WorkerNode!'
+            echo '✅ Pipeline completed successfully!'
         }
 
         failure {
-            echo 'Pipeline execution failed!'
+            echo '❌ Pipeline failed. Check logs for issues.'
         }
 
         always {
-            echo 'Cleaning up workspace...'
+            echo '🧹 Cleaning up workspace...'
             cleanWs()
         }
     }
