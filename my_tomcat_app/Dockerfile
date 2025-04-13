@@ -15,7 +15,7 @@ RUN tar xvfz apache-tomcat-9.0.104.tar.gz && \
     rm apache-tomcat-9.0.104.tar.gz
 
 # Expose Tomcat's default port (8080, not 8000)
-EXPOSE 8080
+EXPOSE 8000
 
 # Start Tomcat server
 CMD ["/opt/tomcat/bin/catalina.sh", "run"]
