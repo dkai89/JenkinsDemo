@@ -12,8 +12,8 @@ ADD https://downloads.apache.org/tomcat/tomcat-9/v9.0.98/bin/apache-tomcat-9.0.9
 RUN tar xvfz apache-tomcat-9.0.98.tar.gz && rm -f apache-tomcat-9.0.98.tar.gz
 RUN mv apache-tomcat-9.0.98/* /opt/tomcat/
 
-# Expose port 8080
-EXPOSE 8080
+# Expose port 8000
+EXPOSE 8000
 
 # Start Tomcat server
 CMD ["/opt/tomcat/bin/catalina.sh", "run"]
