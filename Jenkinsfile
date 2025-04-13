@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         DOCKER_IMAGE = 'dilipdevops1982/djdevops:latest'
-        GIT_REPO = 'https://github.com/discover-devops/JenkinsDemo.git'
+        GIT_REPO = 'https://github.com/dkai89/JenkinsDemo.git'
     }
 
     stages {
