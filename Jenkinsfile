@@ -2,7 +2,7 @@ pipeline {
     agent any  // Use any available Jenkins node (including controller)
     
     environment {
-        DOCKER_IMAGE = 'dilipdevops1982/djdevops:latest'
+        DOCKER_IMAGE = 'dilipdevops1982/myapp:latest'
         GIT_REPO = 'https://github.com/dkai89/JenkinsDemo.git'
     }
 
