@@ -4,7 +4,7 @@ pipeline {
 
     environment {
         REPO_URL     = 'https://github.com/dkai89/JenkinsDemo.git'   // Tumhara GitHub repo URL
-        DOCKER_IMAGE = 'dilipdevops1982/tomcatapp:latest'             // Tumhara Docker image tag
+        DOCKER_IMAGE = 'dilipdevops1982/tomcatapp2:latest'             // Tumhara Docker image tag
         APP_FOLDER   = 'my_tomcat_app'                                // Dockerfile + App files folder
     }
 
