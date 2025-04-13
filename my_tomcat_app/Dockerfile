@@ -9,8 +9,10 @@ WORKDIR /opt/tomcat
 
 # Download and extract Tomcat version 9.0.98
 ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.104/bin/apache-tomcat-9.0.104.tar.gz /opt/tomcat
-RUN tar xvfz apache-tomcat-9.0.98.tar.gz && rm -f apache-tomcat-9.0.98.tar.gz
-RUN mv apache-tomcat-9.0.98/* /opt/tomcat/
+WORKDIR /opt/tomcat
+RUN tar xvfz apache-tomcat-9.0.104.tar.gz && rm -f apache-tomcat-9.0.104.tar.gz
+RUN mv apache-tomcat-9.0.104/* . && rmdir apache-tomcat-9.0.104
+
 
 # Expose port 8000
 EXPOSE 8000
