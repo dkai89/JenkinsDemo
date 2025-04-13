@@ -8,7 +8,7 @@ RUN mkdir /opt/tomcat/
 WORKDIR /opt/tomcat
 
 # Download and extract Tomcat version 9.0.98
-ADD https://downloads.apache.org/tomcat/tomcat-9/v9.0.98/bin/apache-tomcat-9.0.98.tar.gz /opt/tomcat
+ADD https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.104/bin/apache-tomcat-9.0.104.tar.gz /opt/tomcat
 RUN tar xvfz apache-tomcat-9.0.98.tar.gz && rm -f apache-tomcat-9.0.98.tar.gz
 RUN mv apache-tomcat-9.0.98/* /opt/tomcat/
 
